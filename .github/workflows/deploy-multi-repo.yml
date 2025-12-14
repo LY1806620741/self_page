@@ -1,0 +1,80 @@
+name: Deploy Multi-Repo to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # 手动触发
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 步骤1：Checkout 主仓库代码（当前仓库）
+      - name: Checkout main repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: ./main-code # 克隆到 main-code 目录（可选，默认根目录）
+
+      # 步骤2：Clone 其他公共仓库（示例：your-username/other-repo）
+      # - name: Clone other public repo
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: your-username/other-repo # 其他仓库地址
+      #     path: ./other-code # 克隆到当前工作目录的 other-code 子目录
+      #     fetch-depth: 0
+      #     # 公共仓库无需手动指定 token，默认 GITHUB_TOKEN 即可
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 步骤3：（可选）Clone 私有仓库（需配置 PAT）
+      # 1. 先在 GitHub 设置 → Developer settings → Personal access tokens 生成 PAT（勾选 repo 权限）
+      # 2. 仓库 → Settings → Secrets and variables → Actions → 新建 Secret，命名为 OTHER_REPO_PAT
+      - name: Clone private repo (optional)
+        uses: actions/checkout@v4
+        with:
+          repository: LY1806620741/17fei
+          fetch-depth: 0
+          token: ${{ secrets.SLEF_DEPLOY }} # 私有仓库需用 PAT
+
+      # 步骤4：合并/处理多仓库代码（根据需求自定义）
+      # 示例：将 other-repo 的 static 目录复制到主仓库的 dist 目录
+      - name: Merge code from other repos
+        run: |
+          # 进入主仓库目录
+          cd ./main-code
+          # 创建 dist 目录（若不存在）
+          mkdir -p ./dist
+          # 复制其他仓库的静态资源到主仓库 dist 目录
+          cp -r ../17fei ./dist/
+
+      # 步骤5：构建主仓库代码（若需要）
+      # - name: Build main repo
+      #   run: |
+      #     cd ./main-code
+      #     npm install
+      #     npm run build
+
+      # 步骤6：部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          # 部署主仓库构建后的目录（根据实际路径调整）
+          publish_dir: ./main-code/dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          force_orphan: true
+
+      # 步骤7：激活 Pages 部署（可选，增强稳定性）
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./main-code/dist
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v4
