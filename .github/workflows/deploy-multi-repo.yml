@@ -2,7 +2,7 @@ name: Deploy Multi-Repo to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main,test ]
   workflow_dispatch: # 手动触发
 
 permissions:
