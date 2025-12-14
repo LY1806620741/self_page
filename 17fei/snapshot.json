@@ -1,0 +1,42 @@
+{
+  "build_id": "be8fe7ad5c6540c18a8d97b9fff28a7ecc35c36d",
+  "files": {
+    "main.js": [
+      "chunk-RQ5YSL7G.js",
+      "chunk-QI2WNBYA.js",
+      "chunk-TJODIT63.js"
+    ],
+    "deserializer.js": [],
+    "signals.js": [
+      "chunk-BO532NAV.js",
+      "chunk-QI2WNBYA.js",
+      "chunk-TJODIT63.js"
+    ],
+    "island-positionlist_default.js": [
+      "chunk-Q7SAKSU3.js",
+      "chunk-BO532NAV.js",
+      "chunk-TJODIT63.js"
+    ],
+    "island-vip_default.js": [
+      "chunk-RQ5YSL7G.js",
+      "chunk-Q7SAKSU3.js",
+      "chunk-BO532NAV.js",
+      "chunk-QI2WNBYA.js",
+      "chunk-TJODIT63.js"
+    ],
+    "chunk-RQ5YSL7G.js": [],
+    "chunk-Q7SAKSU3.js": [
+      "chunk-TJODIT63.js"
+    ],
+    "chunk-BO532NAV.js": [
+      "chunk-TJODIT63.js"
+    ],
+    "plugin-twind-main.js": [
+      "chunk-QI2WNBYA.js",
+      "chunk-TJODIT63.js"
+    ],
+    "chunk-QI2WNBYA.js": [],
+    "chunk-TJODIT63.js": [],
+    "metafile.json": []
+  }
+}
