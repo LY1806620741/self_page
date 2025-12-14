@@ -55,6 +55,7 @@ jobs:
         run: |
           cd 17fei
           deno task build
+          cd ..
           mkdir dist
           ls
           cp -r ./17fei/_fresh/ ./dist/17fei/
