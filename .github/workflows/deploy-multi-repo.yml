@@ -38,6 +38,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: LY1806620741/17fei
+          path: ./17fei
           fetch-depth: 0
           token: ${{ secrets.SLEF_DEPLOY }} # 私有仓库需用 PAT
       
