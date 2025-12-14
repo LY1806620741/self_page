@@ -53,13 +53,11 @@ jobs:
       # 示例：将 other-repo 的 static 目录复制到主仓库的 dist 目录
       - name: Merge code from other repos
         run: |
-          ls
           cd 17fei
           deno task build
-          ls
-          cd ..
           mkdir dist
-          cp -r ./17fei/dist/ ./dist/17fei/
+          ls
+          cp -r ./17fei/_fresh/ ./dist/17fei/
 
       # 步骤5：构建主仓库代码（若需要）
       # - name: Build main repo
